@@ -3,6 +3,8 @@ package com.jceco.redesocial_api.entities;
 import java.time.Instant;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,6 +15,10 @@ public class Post {
 	private Instant date;
 	private String title;
 	private String body;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User author;
 	
 	public Post() {}
 	
@@ -25,6 +31,16 @@ public class Post {
 		this.body = body;
 	}
 
+
+
+	public User getAuthor() {
+		return author;
+	}
+
+
+	public void setAuthor(User author) {
+		this.author = author;
+	}
 
 
 	public String getId() {

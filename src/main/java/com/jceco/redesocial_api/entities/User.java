@@ -1,23 +1,46 @@
 package com.jceco.redesocial_api.entities;
 
+import java.util.Set;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_user")
 public class User {
 	
+	@Id
 	private String id;
 	private String name;
 	private String email;
 	
+	@OneToMany(mappedBy = "author")
+	private Set<Post> posts;
+	
 	public User() {}
 
-	public User(String id, String name, String email) {
+	public User(String id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	
+	
+
+	public User(String id, String name, String email, Set<Post> posts) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.posts = posts;
+	}
+	
+	
+
+	public Set<Post> getPosts() {
+		return posts;
 	}
 
 	public String getId() {
