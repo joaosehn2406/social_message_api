@@ -38,6 +38,31 @@ public class Post {
 		this.title = title;
 		this.body = body;
 	}
+	
+	
+
+	public Post(Long id, Instant date, String title, String body, User author) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.title = title;
+		this.body = body;
+		this.author = author;
+	}
+	
+	
+
+
+	public Post(Long id, Instant date, String title, String body, List<Comment> comments, User author) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.title = title;
+		this.body = body;
+		this.comments = comments;
+		this.author = author;
+	}
+
 
 	public void addComment(Comment comment) {
 		comments.add(comment);
