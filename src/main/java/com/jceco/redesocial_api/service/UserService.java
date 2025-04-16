@@ -8,9 +8,9 @@ import com.jceco.redesocial_api.DTO.UserDTO;
 public interface UserService {
 	
 	List<UserDTO> findAll();
-	UserDTO findById(String id);
+	UserDTO findById(Long id);
 	UserDTO insert(UserDTO author);
-	UserDTO update(String id, UserDTO author);
-	UserDTO patch(String id, UserDTO author);
-	void delete(String id);
+	UserDTO update(Long id, UserDTO author);
+	UserDTO patch(Long id, UserDTO author);
+	void delete(Long id);
 }

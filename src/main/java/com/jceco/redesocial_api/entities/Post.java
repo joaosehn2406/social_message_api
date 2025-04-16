@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 public class Post {
 	
 	@Id
-	private String id;
+	private Long id;
 	private Instant date;
 	private String title;
 	private String body;
@@ -31,7 +31,7 @@ public class Post {
 	public Post() {}
 	
 
-	public Post(String id, Instant date, String title, String body) {
+	public Post(Long id, Instant date, String title, String body) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -53,11 +53,11 @@ public class Post {
 	}
 
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

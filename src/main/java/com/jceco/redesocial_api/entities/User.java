@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 public class User {
 	
 	@Id
-	private String id;
+	private Long id;
 	private String name;
 	private String email;
 	
@@ -21,7 +21,7 @@ public class User {
 	
 	public User() {}
 
-	public User(String id, String name) {
+	public User(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -29,7 +29,7 @@ public class User {
 	
 	
 
-	public User(String id, String name, String email, Set<Post> posts) {
+	public User(Long id, String name, String email, Set<Post> posts) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -43,11 +43,11 @@ public class User {
 		return posts;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

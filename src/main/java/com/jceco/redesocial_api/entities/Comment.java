@@ -1,5 +1,6 @@
 package com.jceco.redesocial_api.entities;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 import jakarta.persistence.Entity;
@@ -10,10 +11,13 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_comment")
-public class Comment {
+public class Comment implements Serializable{
+	
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private String id;
+	private Long id;
 	private String text;
 	private Instant date;
 	
@@ -28,7 +32,7 @@ public class Comment {
 	public Comment() {}
 
 	
-	public Comment(String id, String text, Instant date) {
+	public Comment(Long id, String text, Instant date) {
 		super();
 		this.id = id;
 		this.text = text;
@@ -37,13 +41,13 @@ public class Comment {
 
 	
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
 
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

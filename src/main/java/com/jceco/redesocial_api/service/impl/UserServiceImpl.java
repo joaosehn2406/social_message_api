@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.jceco.redesocial_api.DTO.UserDTO;
 import com.jceco.redesocial_api.entities.User;
@@ -12,6 +13,7 @@ import com.jceco.redesocial_api.service.UserService;
 
 import jakarta.persistence.EntityNotFoundException;
 
+@Service
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
@@ -32,7 +34,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public UserDTO findById(String id) {
+	public UserDTO findById(Long id) {
 		return repository.findAll().stream()
 				.filter(x -> x.getId().equals(id))
 				.findFirst()
@@ -54,11 +56,10 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public UserDTO update(String id, UserDTO author) {
+	public UserDTO update(Long id, UserDTO author) {
 		User entity = repository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException());
 		
-		entity.setId(author.id());
 		entity.setEmail(author.email());
 		entity.setName(author.name());
 		
@@ -68,19 +69,16 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public UserDTO patch(String id, UserDTO author) {
+	public UserDTO patch(Long id, UserDTO author) {
 		User entity = repository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException());
 		
-		if (entity.getId() != null) {
-			entity.setId(author.id());
-		}
 		
-		if (entity.getEmail() != null) {
+		if (author.email() != null) {
 			entity.setEmail(author.email());
 		}
 		
-		if(entity.getName() != null) {
+		if(author.name() != null) {
 			entity.setName(author.name());
 		}
 		
@@ -91,7 +89,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(Long id) {
 		User entity = repository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException());
 		

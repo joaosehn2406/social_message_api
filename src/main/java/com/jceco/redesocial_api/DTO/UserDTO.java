@@ -2,7 +2,7 @@ package com.jceco.redesocial_api.DTO;
 
 
 
-public record UserDTO (String id, String name, String email) {
+public record UserDTO (Long id, String name, String email) {
 	
 	
 }
