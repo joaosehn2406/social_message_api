@@ -4,6 +4,8 @@ import java.time.Instant;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +16,10 @@ public class Comment {
 	private String id;
 	private String text;
 	private Instant date;
+	
+	@ManyToOne
+	@JoinColumn(name = "post_id")
+	private Post post;
 	
 	public Comment() {}
 
@@ -26,7 +32,7 @@ public class Comment {
 		this.date = date;
 	}
 
-
+	
 
 	public String getId() {
 		return id;
@@ -54,6 +60,14 @@ public class Comment {
 
 	public void setDate(Instant date) {
 		this.date = date;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 

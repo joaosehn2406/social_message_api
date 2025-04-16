@@ -1,11 +1,14 @@
 package com.jceco.redesocial_api.entities;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +20,9 @@ public class Post {
 	private Instant date;
 	private String title;
 	private String body;
+	
+	@OneToMany(mappedBy = "post")
+	private List<Comment> comments = new ArrayList<>();
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -33,7 +39,9 @@ public class Post {
 		this.body = body;
 	}
 
-
+	public void addComment(Comment comment) {
+		comments.add(comment);
+	}
 
 	public User getAuthor() {
 		return author;
