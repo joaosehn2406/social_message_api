@@ -1,8 +1,11 @@
 package com.jceco.redesocial_api.service.impl;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.jceco.redesocial_api.DTO.PostDTO;
+import com.jceco.redesocial_api.entities.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,13 +46,24 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public UserDTO insert(UserDTO author) {
+	public UserDTO insert(UserDTO author, PostDTO posts) {
 		User entity = new User();
 		
 		entity.setId(author.id());
 		entity.setEmail(author.email());
 		entity.setName(author.name());
-		
+
+
+		Post post = new Post();
+
+		post.setId(posts.id());
+		post.setBody(posts.body());
+		post.setTitle(posts.title());
+		post.setDate(posts.date());
+		post.setAuthor(entity);
+
+		entity.getPosts().add(post);
+
 		entity = repository.save(entity);
 		
 		return toDTO(entity);
@@ -96,10 +110,14 @@ public class UserServiceImpl implements UserService{
 		repository.delete(entity);
 		
 	}
-	
+
 	private UserDTO toDTO(User user) {
-		return new UserDTO(user.getId(), user.getName(), user.getEmail());
+		Set<Long> postIds = user.getPosts().stream()
+				.map(Post::getId)
+				.collect(Collectors.toSet());
+		return new UserDTO(user.getId(), user.getName(), user.getEmail(), postIds);
 	}
-	
+
+
 
 }

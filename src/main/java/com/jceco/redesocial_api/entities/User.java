@@ -2,21 +2,19 @@ package com.jceco.redesocial_api.entities;
 
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_user")
 public class User {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String email;
 	
-	@OneToMany(mappedBy = "author")
+	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
 	private Set<Post> posts;
 	
 	public User() {}
@@ -36,8 +34,10 @@ public class User {
 		this.email = email;
 		this.posts = posts;
 	}
-	
-	
+
+	public void setPosts(Set<Post> posts) {
+		this.posts = posts;
+	}
 
 	public Set<Post> getPosts() {
 		return posts;
@@ -91,6 +91,8 @@ public class User {
 			return false;
 		return true;
 	};
-	
-	
+
+
+
+
 }

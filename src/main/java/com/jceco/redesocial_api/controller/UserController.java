@@ -3,6 +3,8 @@ package com.jceco.redesocial_api.controller;
 import java.net.URI;
 import java.util.List;
 
+import com.jceco.redesocial_api.DTO.PostDTO;
+import com.jceco.redesocial_api.DTO.UserPostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,8 +51,10 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserDTO> insert(@RequestBody UserDTO user) {
-		user = service.insert(user);
+	public ResponseEntity<UserDTO> insert(@RequestBody UserPostDTO userPostDTO) {
+
+		UserDTO user = service.insert(userPostDTO.getUser(), userPostDTO.getPost());
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(user.id()).toUri();
 		
