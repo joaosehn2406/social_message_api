@@ -91,7 +91,7 @@ A API realiza o gerenciamento completo de **posts, usuários e comentários**, i
 
 1. **Clone o projeto**:
    ```bash
-   git clone https://github.com/seu-usuario/rede-social-spring.git
+   https://github.com/joaosehn2406/social_message_api.git
    cd seu-projeto-rede-social
    ```
 
